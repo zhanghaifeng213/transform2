@@ -24,30 +24,31 @@
 			overflow: hidden;
 		}
 		.wrap .banner li{
+			width: 100%;
+			height: 30px;
+		}
+		.wrap .banner li P{
 			float: left;
 			width: 40px;
 			height: 100%;
 			transition: 0.5s;
 		}
-		.wrap .banner li:hover{
-			transform: rotateX(360deg);
-		}
-		.wrap .banner li.bg1{
+		.wrap .banner li p.bg1{
 			background: url('timg1.jpg');
 			background-size:400px 300px;
 			background-repeat:no-repeat;
 		}
-		.wrap .banner li.bg2{
+		.wrap .banner li p.bg2{
 			background: url('timg2.jpg');
 			background-size:400px 300px;
 			background-repeat:no-repeat;
 		}
-		.wrap .banner li.bg3{
+		.wrap .banner li p.bg3{
 			background: url('timg3.jpg');
 			background-size:400px 300px;
 			background-repeat:no-repeat;
 		}
-		.wrap .banner li.bg4{
+		.wrap .banner li p.bg4{
 			background: url('timg4.jpg');
 			background-size:400px 300px;
 			background-repeat:no-repeat;
@@ -87,33 +88,37 @@
 			next = document.getElementsByClassName("next"),
 			num = 1;
 			for(var i = 0;i<10;i++){
-				var oL=document.createElement("li");	
-				oL.className="bg1";
-				oL.style.backgroundPositionX = -i*40+'px';
+				var oL=document.createElement("li");
+				for(var j = 0;j<10;j++){
+					var oP=document.createElement("p");
+					oP.className="bg1";
+					oP.style.backgroundPosition = -j*40+'px '+-i*30+'px';
+					oL.appendChild(oP);
+				}
 				oB[0].appendChild(oL);
 			}
 			var oLi = oB[0].querySelectorAll('li');
+			var oP = oB[0].querySelectorAll('p');
+			function move(){
+				for(var i = 0;i<100;i++){
+					oP[i].className="bg"+num;
+					oP[i].style.transform="rotateZ("+360*num+"deg)";
+					oP[i].style.transitionDelay=0.1*(i/10)+"s";
+				}
+			}
 			last[0].onclick = function(){
 				num--;
 				if(num<1){
 					num=4;
 				}
-				for(var i = 0;i<10;i++){
-					oLi[i].className="bg"+num;
-					oLi[i].style.transform="rotateX("+360*num+"deg)";
-					oLi[i].style.transitionDelay=0.1*i+"s";
-				}
+				move();
 			}
 			next[0].onclick = function(){
 				num++;
 				if(num>4){
 					num=1;
 				}
-				for(var i = 0;i<10;i++){
-					oLi[i].className="bg"+num;
-					oLi[i].style.transform="rotateX("+360*num+"deg)";
-					oLi[i].style.transitionDelay=0.1*i+"s";
-				}
+				move();
 			}
 	</script>
 </html>
