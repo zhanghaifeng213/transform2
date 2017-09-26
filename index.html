@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+		}
+		.wrap {
+			position: relative;
+			width: 400px;
+			height: 300px;
+			margin: 50px auto;
+		}
+		.wrap .banner{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.wrap .banner li{
+			float: left;
+			width: 40px;
+			height: 100%;
+			transition: 0.5s;
+		}
+		.wrap .banner li:hover{
+			transform: rotateX(360deg);
+		}
+		.wrap .banner li.bg1{
+			background: url('timg1.jpg');
+			background-size:400px 300px;
+			background-repeat:no-repeat;
+		}
+		.wrap .banner li.bg2{
+			background: url('timg2.jpg');
+			background-size:400px 300px;
+			background-repeat:no-repeat;
+		}
+		.wrap .banner li.bg3{
+			background: url('timg3.jpg');
+			background-size:400px 300px;
+			background-repeat:no-repeat;
+		}
+		.wrap .banner li.bg4{
+			background: url('timg4.jpg');
+			background-size:400px 300px;
+			background-repeat:no-repeat;
+		}
+		.wrap .btn{
+			position: absolute;
+			width: 100%;
+			height: 40px;
+			bottom: -40px;
+			left: 0;
+			display: flex;
+			justify-content: space-around;
+		}
+		.wrap .btn span{
+			background: rgba(7,17,27,.8);
+			line-height: 40px;
+			color: #fff;
+			padding:0 5px;
+		}
+		.wrap .btn span:hover{
+			background: rgba(7,17,27,.5);
+		}
+	</style>
+	<body>
+		<div class="wrap">
+			<ul class="banner"></ul>
+			<div class="btn">
+				<span class="last">上一页</span>
+				<span class="next">下一页</span>
+			</div>
+		</div>
+	</body>
+	<script>
+		var oW = document.getElementsByClassName("wrap"),
+			oB = document.getElementsByClassName("banner"),
+			last = document.getElementsByClassName("last"),
+			next = document.getElementsByClassName("next"),
+			num = 1;
+			for(var i = 0;i<10;i++){
+				var oL=document.createElement("li");	
+				oL.className="bg1";
+				oL.style.backgroundPositionX = -i*40+'px';
+				oB[0].appendChild(oL);
+			}
+			var oLi = oB[0].querySelectorAll('li');
+			last[0].onclick = function(){
+				num--;
+				if(num<1){
+					num=4;
+				}
+				for(var i = 0;i<10;i++){
+					oLi[i].className="bg"+num;
+					oLi[i].style.transform="rotateX("+360*num+"deg)";
+					oLi[i].style.transitionDelay=0.1*i+"s";
+				}
+			}
+			next[0].onclick = function(){
+				num++;
+				if(num>4){
+					num=1;
+				}
+				for(var i = 0;i<10;i++){
+					oLi[i].className="bg"+num;
+					oLi[i].style.transform="rotateX("+360*num+"deg)";
+					oLi[i].style.transitionDelay=0.1*i+"s";
+				}
+			}
+	</script>
+</html>
